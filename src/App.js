@@ -9,6 +9,7 @@ function Encabezado(){
         <span className="nav-link"><Link to="/">Home</Link></span>  
         <span className="nav-link"><Link to="/candidato">Candidato</Link></span>
         <span className="nav-link"><Link to="/vacante">Vacante</Link></span> 
+        <span className="nav-link"><Link to="/cliente">Cliente</Link></span> 
         <span className="nav-link"><Link to="/vacantecandidato">Asignar Candidato a Vacante</Link></span>   
       </nav>    
     </div>
@@ -105,6 +106,7 @@ class Usuario extends React.Component {
       correo:"",
       escolaridad:"",
       carrera:"",
+      requisitos:"",
     }
   }
 
@@ -126,6 +128,7 @@ class Usuario extends React.Component {
             correo: datos.correo,
             escolaridad: datos.escolaridad,
             carrera: datos.carrera,
+            requisitos: datos.requisitos,
           })
         })
         .catch(err=>{
@@ -155,7 +158,7 @@ class Usuario extends React.Component {
 
   render(){
     const listItems = this.state.boletos.map((number) =>
-      <li>{number.id_vacantes}</li>
+      <li>{number.id_vacante}</li>
     );
     return(
       <div>
@@ -166,6 +169,7 @@ class Usuario extends React.Component {
         <p>Correo: {this.state.correo}</p>
         <p>Escolaridad: {this.state.escolaridad}</p>
         <p>Carrera: {this.state.carrera}</p>
+        <p>Requisitos: {this.state.requisitos}</p>
         <p>ID's de las Vacantes del Candidato</p>
         {listItems}
       </div>
@@ -184,6 +188,7 @@ class RegistrarUsuario extends React.Component{
       correo:"",
       escolaridad:"",
       carrera:"",
+      requisitos:"",
     }
   }
 
@@ -206,6 +211,7 @@ class RegistrarUsuario extends React.Component{
           correo: this.state.correo,
           escolaridad: this.state.escolaridad,
           carrera: this.state.carrera,
+          requisitos: this.state.requisitos,
         })
       })
     
@@ -228,7 +234,9 @@ class RegistrarUsuario extends React.Component{
         <p>Escolaridad:</p>
         <input value={this.state.escolaridad} onChange={(e)=>this.setState({...this.state,escolaridad:e.target.value})}></input>
         <p>Carrera:</p>
-        <input value={this.state.escolaridad} onChange={(e)=>this.setState({...this.state,carrera:e.target.value})}></input>
+        <input value={this.state.carrera} onChange={(e)=>this.setState({...this.state,carrera:e.target.value})}></input>
+        <p>Requisitos:</p>
+        <input value={this.state.requisitos} onChange={(e)=>this.setState({...this.state,requisitos:e.target.value})}></input>
         <p></p>
         <button type="button" onClick={this.comunica.bind(this,"hola")} className="btn btn-primary">Crear Candidato</button>
         <p></p>
@@ -462,6 +470,7 @@ class CrearVuelo extends React.Component{
       requisitos:"",
       remuneracion:null,
       cantidad:null,
+      nombre: "",
     }
   }
 
@@ -483,6 +492,7 @@ class CrearVuelo extends React.Component{
           requisitos: this.state.requisitos,
           remuneracion: this.state.remuneracion,
           cantidad: this.state.cantidad,
+          nombre: this.state.nombre,
         })
       })
     
@@ -499,6 +509,8 @@ class CrearVuelo extends React.Component{
     return(
       <div>
         <h1>Pon los siguientes datos: </h1>
+        <p>Nombre de la Vacante: </p>
+        <input value={this.state.nombre} onChange={(e)=>this.setState({...this.state,nombre:e.target.value})}></input>
         <p>Id del Cliente: </p>
         <input value={this.state.id_empresa} onChange={(e)=>this.setState({...this.state,id_empresa:e.target.value})}></input>
         <p>Requisitos:</p>
@@ -510,7 +522,7 @@ class CrearVuelo extends React.Component{
         <p></p>
         <button type="button" onClick={this.comunica.bind(this,"hola")} className="btn btn-primary">Crear Vacante</button>
         <p></p>
-        <p>Tu vuelo es: {this.state.id}</p>
+        <p>Tu Vacante es: {this.state.id}</p>
       </div>
     )
   }
@@ -721,7 +733,7 @@ class CrearBoleto extends React.Component{
     return(
       <div>
         <h1>Pon los siguientes datos: </h1>
-        <p>Id Casndidato:</p>
+        <p>Id Candidato:</p>
         <input value={this.state.id_usuario} onChange={(e)=>this.setState({...this.state,id_usuario:e.target.value})}></input>
         <p>Id Vacante:</p>
         <input value={this.state.id_vuelo} onChange={(e)=>this.setState({...this.state,id_vuelo:e.target.value})}></input>
@@ -788,7 +800,7 @@ class EliminarBoleto extends React.Component{
 function App() {
   return (
     <div className="App">
-        <h1>Aeropuerto</h1>
+        <h1>Proyecto Trabajo</h1>
         <Encabezado/>
         <Routes>
             <Route path="/" element={<Menu/>}>
