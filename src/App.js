@@ -1,18 +1,19 @@
 import React, {useEffect} from 'react';
 import {Routes,Route,Link,Outlet} from 'react-router-dom';
+import './App.css'
 
 
 function Encabezado(){
   return(
-    <div>
-      <nav className="nav">
-        <span className="nav-link"><Link to="/">Home</Link></span>  
-        <span className="nav-link"><Link to="/candidato">Candidato</Link></span>
-        <span className="nav-link"><Link to="/vacante">Vacante</Link></span> 
-        <span className="nav-link"><Link to="/cliente">Cliente</Link></span> 
-        <span className="nav-link"><Link to="/vacantecandidato">Asignar Candidato a Vacante</Link></span>   
-      </nav>    
-    </div>
+    <div className="container-fluid" className="container">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light" >
+    <a className="navbar-brand" style={{float : 'right', paddingRight : '170px'}}href="/">Home</a>
+    <a className="navbar-brand" style={{float : 'right', paddingRight : '170px'}}href="/candidato">Candidato</a>
+    <a className="navbar-brand" style={{float : 'right', paddingRight : '170px'}}href="/vacante">Vacante</a>
+    <a className="navbar-brand" style={{float : 'right', paddingRight : '170px'}}href="/cliente">Cliente</a>
+    <a className="navbar-brand" style={{float : 'right', paddingRight : '170px'}}href="/vacantecandidato">Asignar candidato a vacante</a>
+  </nav>
+  </div>
   )
 }
 
@@ -26,10 +27,11 @@ function Menu(){
 
 function MenuUsuario(){
   return(
-    <div>
-      <nav className="nav">
-        <span className="nav-link"><Link to="/candidato/info">Info del Candidato</Link></span>
-        <span className="nav-link"><Link to="/candidato/registrar">Registrar Candidato</Link></span>            
+    <div className="container-fluid" className="container">
+      <br></br>
+      <nav className="navbar navbar-dark bg-dark">
+      <a className="navbar-brand" style={{float : 'left', paddingLeft : '200px'}}href="/candidato/info">Info del Candidato</a>
+      <a className="navbar-brand" style={{float : 'right', paddingRight : '200px'}}href="/candidato/registrar">Registrar Candidato</a>         
       </nav>
       <Outlet/>       
     </div>
@@ -38,37 +40,41 @@ function MenuUsuario(){
 
 function MenuCliente(){
   return(
-    <div>
-      <nav className="nav">
-        <span className="nav-link"><Link to="/cliente/info">Info del Cliente</Link></span>
-        <span className="nav-link"><Link to="/cliente/registrar">Registrar Cliente</Link></span>            
-      </nav>
-      <Outlet/>       
-    </div>
+    <div className="container-fluid" className="container">
+    <br></br>
+    <nav className="navbar navbar-dark bg-dark">
+    <a className="navbar-brand" style={{float : 'left', paddingLeft : '200px'}}href="/cliente/info">Info del Cliente</a>
+    <a className="navbar-brand" style={{float : 'right', paddingRight : '200px'}}href="/cliente/registrar">Registrar Cliente</a>         
+    </nav>
+    <Outlet/>       
+  </div>
   )
 }
 
 function MenuVuelo(){
   return(
-    <div>
-      <nav className="nav">
-        <span className="nav-link"><Link to="/vacante/info">Información del Vacante</Link></span>     
-        <span className="nav-link"><Link to="/vacante/crearvacante">Crear Vacante</Link></span>
-      </nav>
-      <Outlet/>       
-    </div>
+    <div className="container-fluid" className="container">
+    <br></br>
+    <nav className="navbar navbar-dark bg-dark">
+    <a className="navbar-brand" style={{float : 'left', paddingLeft : '200px'}}href="/vacante/info">Información del Vacante</a>
+    <a className="navbar-brand" style={{float : 'right', paddingRight : '200px'}}href="/vacante/crearvacante">Crear Vacante</a>         
+    </nav>
+    <Outlet/>       
+  </div>
 
   )
 }
 
 function MenuBoleto(){
   return(
-    <div>
-      <nav className="nav">
-        <span className="nav-link"><Link to="/vacantecandidato/asignarvacante">Asignar Vacante</Link></span>     
-      </nav>
-      <Outlet/>       
-    </div>
+
+    <div className="container-fluid" className="container">
+    <br></br>
+    <nav className="navbar navbar-dark bg-dark">
+    <a className="navbar-brand" style={{float : 'left', paddingLeft : '580px'}}href="/vacantecandidato/asignarvacante">Asignar Vacante</a>     
+    </nav>
+    <Outlet/>       
+  </div>
   )
 }
 
@@ -161,10 +167,10 @@ class Usuario extends React.Component {
       <li>{number.id_vacante}</li>
     );
     return(
-      <div>
+      <div className="container-fluid" className="container">
         <h1>Vista del Candidato</h1>
         <input value={this.state.id} onChange={(e)=>this.setState({...this.state,id:e.target.value})}></input>
-        <button type="button" onClick={this.info.bind(this,this.state.id)} className="btn btn-primary">Buscar Candidato</button>
+        <button type="button" onClick={this.info.bind(this,this.state.id)} className="btn btn-outline-secondary">Buscar Candidato</button>
         <p>Nombre: {this.state.nombre}</p>
         <p>Correo: {this.state.correo}</p>
         <p>Escolaridad: {this.state.escolaridad}</p>
@@ -225,7 +231,7 @@ class RegistrarUsuario extends React.Component{
 
   render(){
     return(
-      <div>
+      <div className="container-fluid" className="container">
         <h1>Pon los siguientes datos: </h1>
         <p>Nombre:</p>
         <input value={this.state.nombre} onChange={(e)=>this.setState({...this.state,nombre:e.target.value})}></input>
@@ -309,10 +315,10 @@ class ActualizarUsuario extends React.Component{
 
   render(){
     return(
-      <div>
+      <div className="container-fluid" className="container">
         <h1>Pon los siguientes datos: </h1>
         <input value={this.state.id} onChange={(e)=>this.setState({...this.state,id:e.target.value})}></input>
-        <button type="button" onClick={this.conseguirDatos.bind(this,this.state.id)} className="btn btn-primary">Buscar Usuario</button>
+        <button type="button" onClick={this.conseguirDatos.bind(this,this.state.id)} className="btn btn-outline-secondary">Buscar Usuario</button>
         <p>Nombre:</p>
         <input value={this.state.nombre} onChange={(e)=>this.setState({...this.state,nombre:e.target.value})}></input>
         <p>Correo:</p>
@@ -389,10 +395,10 @@ class Cliente extends React.Component {
       <li>{number.id}</li>
     );
     return(
-      <div>
+      <div className="container-fluid" className="container">
         <h1>Vista del Cliente</h1>
         <input value={this.state.id} onChange={(e)=>this.setState({...this.state,id:e.target.value})}></input>
-        <button type="button" onClick={this.info.bind(this,this.state.id)} className="btn btn-primary">Buscar Cliente</button>
+        <button type="button" onClick={this.info.bind(this,this.state.id)} className="btn btn-outline-secondary">Buscar Cliente</button>
         <p>Empresa: {this.state.empresa}</p>
         <p>Correo: {this.state.correo}</p>
 
@@ -445,7 +451,7 @@ class RegistrarCliente extends React.Component{
 
   render(){
     return(
-      <div>
+      <div className="container-fluid" className="container">
         <h1>Pon los siguientes datos: </h1>
         <p>Nombre de la empresa:</p>
         <input value={this.state.empresa} onChange={(e)=>this.setState({...this.state,empresa:e.target.value})}></input>
@@ -507,7 +513,7 @@ class CrearVuelo extends React.Component{
 
   render(){
     return(
-      <div>
+      <div className="container-fluid" className="container">
         <h1>Pon los siguientes datos: </h1>
         <p>Nombre de la Vacante: </p>
         <input value={this.state.nombre} onChange={(e)=>this.setState({...this.state,nombre:e.target.value})}></input>
@@ -594,10 +600,10 @@ class ActualizarVuelo extends React.Component{
 
   render(){
     return(
-      <div>
+      <div className="container-fluid" className="container">
         <h1>Pon el id del vuelo: </h1>
         <input value={this.state.id} onChange={(e)=>this.setState({...this.state,id:e.target.value})}></input>
-        <button type="button" onClick={this.conseguirDatos.bind(this,this.state.id)} className="btn btn-primary">Buscar Usuario</button>
+        <button type="button" onClick={this.conseguirDatos.bind(this,this.state.id)} className="btn btn-outline-secondary">Buscar Usuario</button>
         <p>lugares: </p>
         <input value={this.state.lugares} onChange={(e)=>this.setState({...this.state,lugares:e.target.value})}></input>
         <p>Pais de Origen:</p>
@@ -681,10 +687,10 @@ class Vuelo extends React.Component{
       <li>{number.id_candidato}</li>
     );
     return(
-      <div>
+      <div className="container-fluid" className="container">
         <h1>Vista del Vacante</h1>
         <input value={this.state.id} onChange={(e)=>this.setState({...this.state,id:e.target.value})}></input>
-        <button type="button" onClick={this.info.bind(this,this.state.id)} className="btn btn-primary">Buscar Vacante</button>
+        <button type="button" onClick={this.info.bind(this,this.state.id)} className="btn btn-outline-secondary">Buscar Vacante</button>
         <p>Nombre de la Vacante: {this.state.nombre}</p>
         <p>Id del Cliente: {this.state.id_empresa}</p>
         <p>Requisitos: {this.state.requisitos}</p>
@@ -731,7 +737,7 @@ class CrearBoleto extends React.Component{
 
   render(){
     return(
-      <div>
+      <div className="container-fluid" className="container">
         <h1>Pon los siguientes datos: </h1>
         <p>Id Candidato:</p>
         <input value={this.state.id_usuario} onChange={(e)=>this.setState({...this.state,id_usuario:e.target.value})}></input>
@@ -779,7 +785,7 @@ class EliminarBoleto extends React.Component{
 
   render(){
     return(
-      <div>
+      <div className="container-fluid" className="container">
         <h1>Pon los siguientes datos: </h1>
         <p>Id Usuario:</p>
         <input value={this.state.nombre} onChange={(e)=>this.setState({...this.state,id_usuario:e.target.value})}></input>
@@ -807,22 +813,18 @@ function App() {
               <Route index element={<Home/>}/>
             </Route>
             <Route path="/candidato" element={<MenuUsuario/>}>
-              <Route index element={<Home/>}/>
               <Route path="info" element={<Usuario/>}/>
               <Route path="registrar" element={<RegistrarUsuario/>}/>
             </Route>
             <Route path="/cliente" element={<MenuCliente/>}>
-              <Route index element={<Home/>}/>
               <Route path="info" element={<Cliente/>}/>
               <Route path="registrar" element={<RegistrarCliente/>}/>
             </Route>
             <Route path="/vacante" element={<MenuVuelo/>}>
-              <Route index element={<Home/>}/>
               <Route path="info" element={<Vuelo/>}/>
               <Route path="crearvacante" element={<CrearVuelo/>}/>
             </Route>
             <Route path="/vacantecandidato" element={<MenuBoleto/>}>
-              <Route index element={<Home/>}/>
               <Route path="asignarvacante" element={<CrearBoleto/>}/>
             </Route>
 
