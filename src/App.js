@@ -113,6 +113,8 @@ class Usuario extends React.Component {
       escolaridad:"",
       carrera:"",
       requisitos:"",
+      cursos:"",
+      estado:"",
     }
   }
 
@@ -135,6 +137,7 @@ class Usuario extends React.Component {
             escolaridad: datos.escolaridad,
             carrera: datos.carrera,
             requisitos: datos.requisitos,
+            cursos: datos.cursos,
           })
         })
         .catch(err=>{
@@ -160,6 +163,26 @@ class Usuario extends React.Component {
         })
   }
 
+  async comunica(info){
+    //Consumiendo el servicio POST  
+    const respuesta = await fetch(`http://localhost:8080/candidato/actualizar/${info}`,{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+          cursos: this.state.cursos,
+        })
+      })
+    
+      //Imprimir lo que responde el servidor
+      const data = await respuesta.json()
+      if(data){
+        this.setState({...this.state,estado:data.estado.mensaje})
+      }
+      
+  }
+
 
 
   render(){
@@ -176,6 +199,13 @@ class Usuario extends React.Component {
         <p>Escolaridad: {this.state.escolaridad}</p>
         <p>Carrera: {this.state.carrera}</p>
         <p>Requisitos: {this.state.requisitos}</p>
+        <p>Cursos:</p>
+        <textarea value={this.state.cursos} onChange={(e)=>this.setState({...this.state,cursos:e.target.value})}></textarea>
+        <p></p>
+        <button type="button" onClick={this.comunica.bind(this,this.state.id)} className="btn btn-primary">Editar Cursos y Progreso</button>
+        <p></p>
+        <p>Respuesta: {this.state.estado}</p>
+        <p></p>
         <p>ID's de las Vacantes del Candidato</p>
         {listItems}
       </div>
@@ -243,6 +273,7 @@ class RegistrarUsuario extends React.Component{
         <input value={this.state.carrera} onChange={(e)=>this.setState({...this.state,carrera:e.target.value})}></input>
         <p>Requisitos:</p>
         <input value={this.state.requisitos} onChange={(e)=>this.setState({...this.state,requisitos:e.target.value})}></input>
+
         <p></p>
         <button type="button" onClick={this.comunica.bind(this,"hola")} className="btn btn-primary">Crear Candidato</button>
         <p></p>
@@ -361,7 +392,7 @@ class Cliente extends React.Component {
         .then(datos=>{
           console.log(datos)
           this.setState({
-            nombre: datos.nombre,
+            empresa: datos.empresa,
             correo: datos.correo,
           })
         })
@@ -806,7 +837,7 @@ class EliminarBoleto extends React.Component{
 function App() {
   return (
     <div className="App">
-        <h1>Proyecto Trabajo</h1>
+        <h1>Modelo remoto del trabajo</h1>
         <Encabezado/>
         <Routes>
             <Route path="/" element={<Menu/>}>
